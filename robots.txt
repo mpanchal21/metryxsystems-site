@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://metryxsystems.com/sitemap.xml
