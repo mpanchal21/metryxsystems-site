@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metryx Systems Letterhead - Updated Icons</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+        }
+        
+        .letterhead-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header-section {
+            background: #2563eb;
+            padding: 1.5rem 2rem;
+        }
+        
+        .body-section {
+            flex: 1;
+            padding: 3rem 2rem;
+            background: white;
+        }
+        
+        .footer-section {
+            background: #374151;
+            padding: 1.5rem 2rem;
+            color: white;
+        }
+        
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .contact-item span {
+            margin-right: 0.5rem;
+            font-size: 1.2em;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+        
+        .vosb-badge {
+            background-color: #2563eb;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="letterhead-page">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="flex justify-between items-start">
+                <!-- Left side - Logo and Company Info -->
+                <div class="flex items-start">
+                    <div class="logo-container mr-6">
+                        <img src="https://page.gensparksite.com/v1/base64_upload/593a4883fdad69b21690dcf60c84b6b4" alt="Metryx Systems Logo" class="w-full h-full object-contain">
+                    </div>
+                    <div class="text-white">
+                        <h1 class="text-4xl font-bold mb-2">Metryx Systems LLC</h1>
+                        <p class="text-xl mb-3">Veteran-Owned Small Business</p>
+                        <p class="text-lg leading-relaxed max-w-2xl">Modernizing IT systems with secure, scalable solutions that enhance mission readiness and operational efficiency.</p>
+                    </div>
+                </div>
+                
+                <!-- Right side - Contact Info -->
+                <div class="text-right">
+                    <div class="contact-item justify-end items-center">
+                        <span>🌐</span>
+                        <span class="text-lg">www.metryxsystems.com</span>
+                    </div>
+                    <div class="contact-item justify-end items-center">
+                        <span>✉️</span>
+                        <span class="text-lg">info@metryxsystems.com</span>
+                    </div>
+                    <div class="contact-item justify-end items-center">
+                        <span>📞</span>
+                        <span class="text-lg">(703) 863-2430</span>
+                    </div>
+					<div class="contact-item justify-end items-center">
+                        <span>📍</span>
+                        <span class="text-lg">13129 Point Pleasant Drive Fairfax, VA 22033</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Body Section -->
+        <div class="body-section">
+            <!-- Clean space for letter content -->
+        </div>
+        
+        <!-- Footer Section -->
+        <div class="footer-section">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <span class="text-lg font-medium">Modernizing IT Infrastructure • AI/ML Ops • Cloud Engineering • DevSecOps • Cybersecurity</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="badge vosb-badge">VOSB</span> <span class="badge vosb-badge">🔒 FedRAMP Aligned Security </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
