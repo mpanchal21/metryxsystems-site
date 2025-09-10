@@ -6,68 +6,126 @@
   <title>Privacy Policy | Metryx Systems</title>
   <meta name="description" content="Privacy practices for Metryx Systems LLC including what we collect, how we use information, and your choices." />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <link rel="icon" href="/favicon.ico" />
-  <style> body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif} .container{max-width:900px} </style>
+  <style>
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .gradient-blue { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+    .gradient-hero { background: linear-gradient(135deg, rgba(30,58,138,0.85) 0%, rgba(59,130,246,0.85) 50%, rgba(5,150,105,0.85) 100%); }
+    .container{max-width:950px}
+  </style>
 </head>
 <body class="bg-white text-gray-800">
+  <!-- Top Bar -->
+  <header class="w-full gradient-blue text-white">
+    <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/assets/img/logo.png" alt="Metryx Systems" class="h-10 w-10 rounded" />
+        <span class="font-extrabold tracking-wide">Metryx Systems</span>
+      </a>
+      <nav class="hidden sm:flex gap-6 text-sm">
+        <a href="/" class="hover:text-orange-300">Home</a>
+        <a href="/terms" class="hover:text-orange-300">Terms</a>
+        <a href="/privacy" class="hover:text-orange-300">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative">
+    <div class="absolute inset-0">
+      <img src="/assets/hero/bg3.jpg" alt="Hero background" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 gradient-hero"></div>
+    </div>
+    <div class="relative container mx-auto px-6 py-16 sm:py-24 text-white text-center">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white bg-opacity-20 mb-4">
+        <i class="fas fa-shield-alt text-2xl"></i>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold">Privacy Policy</h1>
+      <p class="opacity-90 mt-2">Last updated: September 10, 2025</p>
+    </div>
+  </section>
+
+  <!-- Body -->
   <main class="container mx-auto px-6 py-12">
-    <h1 class="text-3xl sm:text-4xl font-extrabold mb-2">Privacy Policy</h1>
-    <p class="text-gray-500 mb-8">Last updated: September 10, 2025</p>
+    <div class="grid gap-6 md:grid-cols-3 mb-10">
+      <div class="bg-blue-50 rounded-xl p-5 text-center">
+        <i class="fas fa-user-shield text-blue-600 text-2xl"></i>
+        <h3 class="font-semibold mt-2">Security First</h3>
+        <p class="text-sm text-gray-600">FedRAMP‑aligned practices where applicable.</p>
+      </div>
+      <div class="bg-green-50 rounded-xl p-5 text-center">
+        <i class="fas fa-cookie-bite text-green-600 text-2xl"></i>
+        <h3 class="font-semibold mt-2">Cookie Control</h3>
+        <p class="text-sm text-gray-600">Manage cookies in your browser settings.</p>
+      </div>
+      <div class="bg-orange-50 rounded-xl p-5 text-center">
+        <i class="fas fa-layer-group text-orange-600 text-2xl"></i>
+        <h3 class="font-semibold mt-2">Minimal Collection</h3>
+        <p class="text-sm text-gray-600">We collect only what we need.</p>
+      </div>
+    </div>
 
-    <p class="mb-6">Metryx Systems LLC ("Metryx Systems", "we", "our") respects your privacy. This notice explains what we collect on <strong>metryxsystems.com</strong> and our related pages, how we use it, and the choices you have.</p>
+    <section class="space-y-8">
+      <div>
+        <h2 class="text-xl font-bold mb-2">Scope</h2>
+        <p>Metryx Systems LLC ("Metryx Systems", "we", "our") respects your privacy. This notice covers information we collect on <strong>metryxsystems.com</strong> and pages that link to this policy.</p>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Scope</h2>
-    <p class="mb-6">This policy covers information collected online through our website and any forms that link to it. By using the site, you consent to this policy.</p>
+      <div>
+        <h2 class="text-xl font-bold mb-2">Information We Collect</h2>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>Information you provide</strong> (name, email, phone, resume, messages).</li>
+          <li><strong>Automatic data</strong> (IP, device/browser, pages viewed, timestamps) and limited cookie data for analytics and performance.</li>
+        </ul>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Information We Collect</h2>
-    <ul class="list-disc pl-6 space-y-2 mb-6">
-      <li><strong>Information you provide</strong> — e.g., name, email, phone, resume or application details, and any messages you send us.</li>
-      <li><strong>Automatic information</strong> — e.g., IP address, browser and device data, pages viewed, timestamps, referring pages, and limited data collected via cookies, pixels, or similar technologies.</li>
-    </ul>
+      <div>
+        <h2 class="text-xl font-bold mb-2">How We Use Information</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <ul class="list-disc pl-6 space-y-2 text-gray-700">
+            <li>Operate and improve the site and services.</li>
+            <li>Respond to inquiries and candidate submissions.</li>
+            <li>Send service or role updates (opt‑out anytime).</li>
+          </ul>
+          <ul class="list-disc pl-6 space-y-2 text-gray-700">
+            <li>Analyze usage to enhance experience.</li>
+            <li>Comply with law and protect rights and security.</li>
+          </ul>
+        </div>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">How We Use Information</h2>
-    <ul class="list-disc pl-6 space-y-2 mb-6">
-      <li>Operate, maintain, secure, and improve our site and services.</li>
-      <li>Respond to inquiries; provide customer or candidate support.</li>
-      <li>Send updates about services, events, or roles you may find relevant (you can opt out any time).</li>
-      <li>Analyze site usage to improve content and user experience.</li>
-      <li>Comply with law and protect our rights, users, and property.</li>
-    </ul>
+      <div>
+        <h2 class="text-xl font-bold mb-2">Cookies & Similar Technologies</h2>
+        <p>We may use first‑ or third‑party cookies for analytics and essential features. You can control cookies in your browser; disabling them may limit functionality.</p>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Cookies & Similar Technologies</h2>
-    <p class="mb-6">We may use first- or third‑party cookies and similar tools for analytics, performance, and basic site features. You can manage cookies in your browser settings; disabling cookies may limit some functionality.</p>
+      <div>
+        <h2 class="text-xl font-bold mb-2">When We Share Information</h2>
+        <p class="mb-2">We do not sell personal data. We may share with:</p>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li><strong>Service providers</strong> that host, maintain, analyze, or support operations.</li>
+          <li><strong>Authorities</strong> when required by law or to protect safety and rights.</li>
+          <li><strong>Business transfers</strong> in connection with a merger or acquisition.</li>
+        </ul>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">When We Share Information</h2>
-    <p class="mb-3">We do not sell personal data. We may share limited information with:</p>
-    <ul class="list-disc pl-6 space-y-2 mb-6">
-      <li><strong>Service providers</strong> that host, maintain, analyze, or support our site and operations.</li>
-      <li><strong>Authorities</strong> when required by law or to protect safety, security, and legal rights.</li>
-      <li><strong>Business transfers</strong> in connection with a merger, acquisition, or similar event.</li>
-    </ul>
+      <div>
+        <h2 class="text-xl font-bold mb-2">Data Security & Retention</h2>
+        <p>We use reasonable administrative, technical, and physical safeguards. No method is perfect, but we work to protect your data. We retain information as needed for the purposes described or as required by law.</p>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Data Security & Retention</h2>
-    <p class="mb-6">We use reasonable administrative, technical, and physical safeguards. No method is perfect, but we work to protect your data. We retain information as long as needed for the purposes described or as required by law.</p>
+      <div>
+        <h2 class="text-xl font-bold mb-2">Children’s Privacy</h2>
+        <p>Our site is not intended for children under 18. If you believe a child provided data, contact us and we will delete it.</p>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Children’s Privacy</h2>
-    <p class="mb-6">Our site is not intended for children under 18, and we do not knowingly collect data from them. If you believe a child provided data, contact us and we will delete it.</p>
+      <div>
+        <h2 class="text-xl font-bold mb-2">International Visitors</h2>
+        <p>Data may be processed in the United States, where privacy laws may differ from those in your country.</p>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">International Visitors</h2>
-    <p class="mb-6">If you access the site from outside the United States, your information may be processed in the U.S., where privacy laws may differ from those in your country.</p>
-
-    <h2 class="text-xl font-bold mt-10 mb-3">Your Choices</h2>
-    <ul class="list-disc pl-6 space-y-2 mb-6">
-      <li>Opt out of marketing emails by using the unsubscribe link or contacting us.</li>
-      <li>Request access, correction, or deletion of personal data we hold, subject to applicable law.</li>
-    </ul>
-
-    <h2 class="text-xl font-bold mt-10 mb-3">Changes to This Policy</h2>
-    <p class="mb-6">We may update this policy. The “Last updated” date shows the most recent version. Material changes will be posted on this page.</p>
-
-    <h2 class="text-xl font-bold mt-10 mb-3">Contact Us</h2>
-    <address class="not-italic mb-2">Metryx Systems LLC<br>13129 Point Pleasant Drive<br>Fairfax, VA 22033</address>
-    <p class="mb-1">Email: <a class="text-blue-600" href="mailto:info@metryxsystems.com">info@metryxsystems.com</a></p>
-    <p class="mb-1">Phone: <a class="text-blue-600" href="tel:+17038632430">(703) 863-2430</a></p>
-    <p class="text-gray-500 text-sm">SAM UEI: UZFKLR63N7L5 · CAGE: 159J1</p>
-  </main>
-</body>
-</html>
+      <div>
+        <h2 class="text-xl font-bold mb-2">Your Choices</h2>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li>Opt out of marketing emails via the unsubscribe link or by con
