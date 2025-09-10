@@ -1,1001 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metryx Systems</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="./assets/hero/bg1.jpg">
-    <style>
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .gradient-blue { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
-        .gradient-orange { background: linear-gradient(135deg, #ea580c 0%, #f97316 100%); }
-        .gradient-green { background: linear-gradient(135deg, #059669 0%, #10b981 100%); }
-        .gradient-purple { background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); }
-        .gradient-hero { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #059669 100%); }
-        
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        
-        .service-card { transition: all 0.3s ease; border: 2px solid transparent; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); }
-        
-        .nav-link { transition: all 0.3s ease; }
-        .nav-link:hover { color: #f97316; }
-        
-        html { scroll-behavior: smooth; }
-        .section-padding { padding: 4rem 0; }
-        @media (max-width: 768px) { .section-padding { padding: 3rem 0; } }
-		
-		/* Mobile Navigation */
-        .mobile-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
-        .mobile-menu.active { transform: translateX(0); }
-        .mobile-menu-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
-        .mobile-menu-overlay.active { opacity: 1; visibility: visible; }
-
-		/* Hero Section with Dynamic Background */
-        .hero {
-            min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center;
-            text-align: center; color: white; overflow: hidden;
-        }
-        .hero-background {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center; transition: opacity 2s ease-in-out; opacity: 0;
-        }
-        .hero-background.active { opacity: 1; }
-
-        /* LOCAL hero images */
-        .hero-background.bg1  { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg1.jpg'); }
-        .hero-background.bg2  { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg2.jpg'); }
-        .hero-background.bg3  { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg3.jpg'); }
-        .hero-background.bg4  { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg4.jpg'); }
-		.hero-background.bg5  { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg5.JPG'); }
-        .hero-background.bg6  { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg6.jpg'); }
-        .hero-background.bg7  { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg7.jpg'); }
-        .hero-background.bg8  { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg8.JPG'); }
-        .hero-background.bg9  { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg9.jpg'); }
-        .hero-background.bg10 { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('./assets/hero/bg10.jpg'); }
-
-        .hero-content { position: relative; z-index: 10; max-width: 900px; }
-
-        /* Mobile-First Typography */
-        .hero h1 { font-size: 2rem; line-height: 1.2; margin-bottom: 1rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1rem; line-height: 1.5; margin-bottom: 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-        @media (min-width: 480px){ .hero h1{font-size:2.5rem;} .hero p{font-size:1.1rem;} }
-        @media (min-width: 640px){ .hero h1{font-size:3rem;} .hero p{font-size:1.2rem;} }
-        @media (min-width: 768px){ .hero h1{font-size:3.5rem;} .hero p{font-size:1.3rem;} }
-        @media (min-width: 1024px){ .hero h1{font-size:4rem;} }
-
-        /* Enhanced Mobile Button Styles */
-        .cta-button {
-            background: linear-gradient(135deg, #ff6b35, #f7931e); color: white; padding: 16px 24px; text-decoration: none;
-            border-radius: 12px; font-weight: bold; font-size: 1rem; transition: all 0.3s ease; display: inline-block;
-            box-shadow: 0 4px 15px rgba(255,107,53,0.3); min-height: 48px; min-width: 120px; text-align: center;
-        }
-        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,53,0.4); }
-        @media (min-width: 768px){ .cta-button{ padding:18px 32px; font-size:1.1rem; } }
-
-        .scroll-mt-20 { scroll-margin-top: 6rem; }
-        .touch-target { min-height: 44px; min-width: 44px; }
-        @media (max-width: 640px){
-            .mobile-px-4{ padding-left:1rem; padding-right:1rem; }
-            .mobile-py-3{ padding-top:0.75rem; padding-bottom:0.75rem; }
-            .mobile-mb-6{ margin-bottom:1.5rem; }
-            .mobile-text-sm{ font-size:0.875rem; }
-            .mobile-gap-4{ gap:1rem; }
-        }
-        .nav-height { height: 70px; }
-        @media (min-width: 768px){ .nav-height { height: 80px; } }
-        @media (max-width: 640px){ .service-card { padding:1.5rem; margin-bottom:1rem; } }
-        @media (max-width: 768px){ .footer-grid { grid-template-columns:1fr; gap:2rem; text-align:center; } }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Metryx Systems</title>
+  <meta name="description" content="Metryx Systems LLC – Veteran‑Owned Small Business modernizing federal mission systems with secure cloud, DevSecOps, data & AI, and application modernization." />
+  <meta property="og:title" content="Metryx Systems – Veteran‑Owned Small Business" />
+  <meta property="og:description" content="Secure, Smart, Cost‑effective modernization for federal missions." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="./assets/hero/bg1.jpg">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    .gradient-blue { background: linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%); }
+    .gradient-orange { background: linear-gradient(135deg,#ea580c 0%,#f97316 100%); }
+    .gradient-green { background: linear-gradient(135deg,#059669 0%,#10b981 100%); }
+    .gradient-purple { background: linear-gradient(135deg,#7c3aed 0%,#a855f7 100%); }
+    .gradient-hero { background: linear-gradient(135deg,#1e3a8a 0%,#3b82f6 50%,#059669 100%); }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-20px) } }
+    .service-card { transition: all .3s ease; border: 2px solid transparent; }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04); }
+    .nav-link { transition: all .3s ease; }
+    .nav-link:hover { color: #f97316; }
+    html { scroll-behavior: smooth; }
+    .section-padding { padding: 4rem 0 }
+    @media (max-width:768px){ .section-padding{ padding:3rem 0 } }
+    /* Mobile Navigation */
+    .mobile-menu { transform: translateX(-100%); transition: transform .3s ease-in-out; }
+    .mobile-menu.active { transform: translateX(0); }
+    .mobile-menu-overlay { opacity:0; visibility:hidden; transition: opacity .3s, visibility .3s; }
+    .mobile-menu-overlay.active { opacity:1; visibility:visible; }
+    /* Hero */
+    .hero{ min-height:100vh; position:relative; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff; overflow:hidden }
+    .hero-background{ position:absolute; inset:0; background-size:cover; background-position:center; transition: opacity 2s ease-in-out; opacity:0 }
+    .hero-background.active{ opacity:1 }
+    .hero-background.bg1{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg1.jpg') }
+    .hero-background.bg2{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg2.jpg') }
+    .hero-background.bg3{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg3.jpg') }
+    .hero-background.bg4{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg4.jpg') }
+    .hero-background.bg5{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg5.JPG') }
+    .hero-background.bg6{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg6.jpg') }
+    .hero-background.bg7{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg7.jpg') }
+    .hero-background.bg8{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg8.JPG') }
+    .hero-background.bg9{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg9.jpg') }
+    .hero-background.bg10{ background-image:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('./assets/hero/bg10.jpg') }
+    .hero-content{ position:relative; z-index:10; max-width:900px }
+    .hero h1{ font-size:2rem; line-height:1.2; margin-bottom:1rem; font-weight:800; text-shadow:2px 2px 4px rgba(0,0,0,.5) }
+    .hero p{ font-size:1rem; line-height:1.5; margin-bottom:2rem; text-shadow:1px 1px 2px rgba(0,0,0,.5) }
+    @media (min-width:480px){ .hero h1{ font-size:2.5rem } .hero p{ font-size:1.1rem } }
+    @media (min-width:640px){ .hero h1{ font-size:3rem } .hero p{ font-size:1.2rem } }
+    @media (min-width:768px){ .hero h1{ font-size:3.5rem } .hero p{ font-size:1.3rem } }
+    @media (min-width:1024px){ .hero h1{ font-size:4rem } }
+    .cta-button{ background:linear-gradient(135deg,#ff6b35,#f7931e); color:#fff; padding:16px 24px; border-radius:12px; font-weight:700; font-size:1rem; transition:all .3s; display:inline-block; box-shadow:0 4px 15px rgba(255,107,53,.3); min-height:48px; min-width:120px; text-align:center }
+    .cta-button:hover{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(255,107,53,.4) }
+    @media (min-width:768px){ .cta-button{ padding:18px 32px; font-size:1.1rem } }
+    .scroll-mt-20{ scroll-margin-top:6rem }
+    .touch-target{ min-height:44px; min-width:44px }
+    @media (max-width:640px){ .mobile-px-4{ padding-left:1rem; padding-right:1rem } .mobile-py-3{ padding-top:.75rem; padding-bottom:.75rem } .mobile-mb-6{ margin-bottom:1.5rem } .mobile-text-sm{ font-size:.875rem } .mobile-gap-4{ gap:1rem } }
+    .nav-height{ height:70px }
+    @media (min-width:768px){ .nav-height{ height:80px } }
+    @media (max-width:640px){ .service-card{ padding:1.5rem; margin-bottom:1rem } }
+    @media (max-width:768px){ .footer-grid{ grid-template-columns:1fr; gap:2rem; text-align:center } }
+    /* Focus styles for accessibility */
+    :focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+  </style>
 </head>
 <body class="bg-white text-gray-800">
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-menu-overlay fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" id="mobileOverlay"></div>
-    
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full gradient-blue shadow-lg z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center nav-height">
-                <div class="flex items-center">
-                    <img src="./assets/img/logo.png" alt="Metryx Systems Logo" class="h-10 w-10 sm:h-12 sm:w-12 mr-2 sm:mr-3">
-                    <div>
-                        <h1 class="text-white text-lg sm:text-xl font-bold">Metryx Systems</h1>
-                        <p class="text-blue-200 text-xs sm:text-sm">Veteran-Owned Small Business</p>
-                    </div>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex space-x-6 lg:space-x-8">
-                    <a href="#home" class="nav-link text-white hover:text-orange-300 font-medium">Home</a>
-                    <a href="#about" class="nav-link text-white hover:text-orange-300 font-medium">About Us</a>
-                    <a href="#services" class="nav-link text-white hover:text-orange-300 font-medium">Services</a>
-                    <a href="#customers" class="nav-link text-white hover:text-orange-300 font-medium">Customers</a>
-                    <a href="#contracts" class="nav-link text-white hover:text-orange-300 font-medium">Contract Vehicles</a>
-                    <a href="#careers" class="nav-link text-white hover:text-orange-300 font-medium">Careers</a>
-                    <a href="#contact" class="gradient-orange text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300">Contact Us</a>
-                </div>
-                
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-white text-2xl touch-target" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+  <a href="#home" class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:left-3 focus:top-3 bg-white text-blue-900 px-3 py-2 rounded">Skip to content</a>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="mobile-menu-overlay fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" id="mobileOverlay" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full gradient-blue shadow-lg z-50" role="navigation" aria-label="Primary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center nav-height">
+        <div class="flex items-center">
+          <img src="./assets/img/logo.png" alt="Metryx Systems logo" class="h-10 w-10 sm:h-12 sm:w-12 mr-2 sm:mr-3" />
+          <div>
+            <h1 class="text-white text-lg sm:text-xl font-bold">Metryx Systems</h1>
+            <p class="text-blue-200 text-xs sm:text-sm">Veteran‑Owned Small Business</p>
+          </div>
         </div>
-        
-        <!-- Mobile Navigation Menu -->
-        <div class="mobile-menu fixed left-0 top-0 w-80 h-full gradient-blue shadow-xl z-50 md:hidden" id="mobileMenu">
-            <div class="p-6">
-                <div class="flex items-center justify-between mb-8">
-                    <div class="flex items-center">
-                        <img src="./assets/img/logo.png" alt="Metryx Systems Logo" class="h-10 w-10 mr-3">
-                        <div>
-                            <h1 class="text-white text-lg font-bold">Metryx Systems</h1>
-                            <p class="text-blue-200 text-xs">Veteran-Owned</p>
-                        </div>
-                    </div>
-                    <button class="text-white text-2xl touch-target" id="closeMobileMenu">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <nav class="space-y-4">
-                    <a href="#home" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link">
-                        <i class="fas fa-home mr-3"></i>Home
-                    </a>
-                    <a href="#about" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link">
-                        <i class="fas fa-info-circle mr-3"></i>About Us
-                    </a>
-                    <a href="#services" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link">
-                        <i class="fas fa-cogs mr-3"></i>Services
-                    </a>
-                    <a href="#customers" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link">
-                        <i class="fas fa-users mr-3"></i>Customers
-                    </a>
-                    <a href="#contracts" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link">
-                        <i class="fas fa-file-contract mr-3"></i>Contracts
-                    </a>
-                    <a href="#careers" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link">
-                        <i class="fas fa-briefcase mr-3"></i>Careers
-                    </a>
-                    <a href="#contact" class="block gradient-orange text-white text-lg py-4 px-4 rounded-lg font-semibold mt-6 text-center mobile-nav-link">
-                        <i class="fas fa-envelope mr-3"></i>Contact Us
-                    </a>
-                </nav>
-            </div>
+        <div class="hidden md:flex space-x-6 lg:space-x-8 items-center">
+          <a href="#home" class="nav-link text-white hover:text-orange-300 font-medium">Home</a>
+          <a href="#about" class="nav-link text-white hover:text-orange-300 font-medium">About Us</a>
+          <a href="#services" class="nav-link text-white hover:text-orange-300 font-medium">Services</a>
+          <a href="#security" class="nav-link text-white hover:text-orange-300 font-medium">Security & Compliance</a>
+          <a href="#customers" class="nav-link text-white hover:text-orange-300 font-medium">Customers</a>
+          <a href="#contracts" class="nav-link text-white hover:text-orange-300 font-medium">Contract Vehicles</a>
+          <a href="#careers" class="nav-link text-white hover:text-orange-300 font-medium">Careers</a>
+          <a href="#contact" class="gradient-orange text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300">Contact Us</a>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-background bg1 active"></div>
-        <div class="hero-background bg2"></div>
-        <div class="hero-background bg3"></div>
-        <div class="hero-background bg4"></div>
-		<div class="hero-background bg5"></div>
-        <div class="hero-background bg6"></div>
-        <div class="hero-background bg7"></div>
-        <div class="hero-background bg8"></div>
-        <div class="hero-background bg9"></div>
-        <div class="hero-background bg10"></div>
-       	
-		<div class="hero-content">
-            <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8 pt-20">
-                <div class="flex justify-center items-center min-h-[60vh]">
-                    <div class="text-white text-center">
-                        <h1 class="font-bold mobile-mb-6 mb-6 leading-tight">
-                            <span class="block">Veteran-Led Innovations</span> 
-                            <span class="inline-block text-orange-300 font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-wide">
-                                Secure, Smart, Cost-effective.
-                            </span>
-                        </h1>
-                        <p class="mobile-mb-6 mb-8 text-blue-100 max-w-4xl mx-auto">
-							 At Metryx Systems, we bring the discipline of military service and GovCon expertise to modernize outdated platforms into resilient, cyber-hardened and future-ready systems. We deliver modernization at mission speed — accelerating security, agility, and value for our customers missions.
-						</p>
-                        <div class="flex flex-col gap-4 justify-center items-center">
-                            <a href="#contact" class="cta-button w-full sm:w-auto">
-                                <i class="fas fa-rocket mr-2"></i>Partner With Us Today
-                            </a>
-                            <a href="#services" class="border-2 border-white text-white px-6 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300 text-center w-full sm:w-auto touch-target">
-                                <i class="fas fa-cogs mr-2"></i>View Our Services
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        <button class="md:hidden text-white text-2xl touch-target" id="mobileMenuBtn" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu fixed left-0 top-0 w-80 h-full gradient-blue shadow-xl z-50 md:hidden" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile menu">
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-8">
+          <div class="flex items-center">
+            <img src="./assets/img/logo.png" alt="Metryx Systems logo" class="h-10 w-10 mr-3" />
+            <div>
+              <h2 class="text-white text-lg font-bold">Metryx Systems</h2>
+              <p class="text-blue-200 text-xs">Veteran‑Owned</p>
             </div>
+          </div>
+          <button class="text-white text-2xl touch-target" id="closeMobileMenu" aria-label="Close menu">
+            <i class="fas fa-times" aria-hidden="true"></i>
+          </button>
         </div>
-    </section>
+        <nav class="space-y-4">
+          <a href="#home" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link"><i class="fas fa-home mr-3" aria-hidden="true"></i>Home</a>
+          <a href="#about" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link"><i class="fas fa-info-circle mr-3" aria-hidden="true"></i>About Us</a>
+          <a href="#services" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link"><i class="fas fa-cogs mr-3" aria-hidden="true"></i>Services</a>
+          <a href="#security" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link"><i class="fas fa-shield-alt mr-3" aria-hidden="true"></i>Security & Compliance</a>
+          <a href="#customers" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link"><i class="fas fa-users mr-3" aria-hidden="true"></i>Customers</a>
+          <a href="#contracts" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link"><i class="fas fa-file-contract mr-3" aria-hidden="true"></i>Contracts</a>
+          <a href="#careers" class="block text-white text-lg py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors mobile-nav-link"><i class="fas fa-briefcase mr-3" aria-hidden="true"></i>Careers</a>
+          <a href="#contact" class="block gradient-orange text-white text-lg py-4 px-4 rounded-lg font-semibold mt-6 text-center mobile-nav-link"><i class="fas fa-envelope mr-3" aria-hidden="true"></i>Contact Us</a>
+        </nav>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Problem Section -->
-    <section class="section-padding bg-gray-50 scroll-mt-20">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
-            <div class="text-center mobile-mb-6 mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-6">Today's IT Challenges</h2>
-                <div class="w-24 h-1 gradient-orange mx-auto mobile-mb-6 mb-8"></div>
+  <!-- Hero -->
+  <section id="home" class="hero" aria-label="Hero">
+    <div class="hero-background bg1 active"></div>
+    <div class="hero-background bg2"></div>
+    <div class="hero-background bg3"></div>
+    <div class="hero-background bg4"></div>
+    <div class="hero-background bg5"></div>
+    <div class="hero-background bg6"></div>
+    <div class="hero-background bg7"></div>
+    <div class="hero-background bg8"></div>
+    <div class="hero-background bg9"></div>
+    <div class="hero-background bg10"></div>
+    <div class="hero-content">
+      <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8 pt-20">
+        <div class="flex justify-center items-center min-h-[60vh]">
+          <div class="text-white text-center">
+            <h1 class="font-extrabold mobile-mb-6 mb-6 leading-tight">
+              <span class="block">Veteran‑Led Innovations</span>
+              <span class="inline-block text-orange-300 text-3xl sm:text-4xl md:text-5xl tracking-wide">Secure, Smart, Cost‑effective.</span>
+            </h1>
+            <p class="mobile-mb-6 mb-8 text-blue-100 max-w-4xl mx-auto">At Metryx Systems, we bring the discipline of military service and GovCon expertise to modernize outdated platforms into resilient, cyber‑hardened, future‑ready systems. We deliver modernization at mission speed — accelerating security, agility, and value for our customers' missions.</p>
+            <div class="flex flex-col gap-4 justify-center items-center">
+              <a href="#contact" class="cta-button w-full sm:w-auto"><i class="fas fa-rocket mr-2" aria-hidden="true"></i>Partner With Us Today</a>
+              <a href="#services" class="border-2 border-white text-white px-6 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300 text-center w-full sm:w-auto touch-target"><i class="fas fa-cogs mr-2" aria-hidden="true"></i>View Our Services</a>
+              <a href="/assets/Metryx_Capability_Statement.pdf" class="underline hover:no-underline text-white text-sm" target="_blank" rel="noopener">Download our Capability Statement (PDF)</a>
             </div>
-            <div class="grid gap-6 md:grid-cols-3 mobile-gap-4">
-                <div class="bg-white mobile-px-4 p-8 rounded-xl shadow-lg border-l-4 border-red-500">
-                    <div class="text-red-500 text-3xl sm:text-4xl mobile-mb-6 mb-4">
-                        <i class="fas fa-server"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold mobile-mb-6 mb-4 text-gray-900">Outdated, Fragile Systems</h3>
-                    <p class="text-gray-600 mobile-text-sm">We are burdened with legacy IT infrastructure that struggles to meet modern demands and user expectations.</p>
-                </div>
-                <div class="bg-white mobile-px-4 p-8 rounded-xl shadow-lg border-l-4 border-red-500">
-                    <div class="text-red-500 text-3xl sm:text-4xl mobile-mb-6 mb-4">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold mobile-mb-6 mb-4 text-gray-900">Budget Drain & Security Risks</h3>
-                    <p class="text-gray-600 mobile-text-sm">These systems drain budgets, slow down missions, and create vulnerabilities that put taxpayer dollars and national security at risk.</p>
-                </div>
-                <div class="bg-white mobile-px-4 p-8 rounded-xl shadow-lg border-l-4 border-red-500">
-                    <div class="text-red-500 text-3xl sm:text-4xl mobile-mb-6 mb-4">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold mobile-mb-6 mb-4 text-gray-900">Modernization Delays</h3>
-                    <p class="text-gray-600 mobile-text-sm">Delays in modernization waste years of effort and frustrate mission staff who need reliable, efficient systems.</p>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- About Us Section -->
-    <section id="about" class="section-padding bg-white scroll-mt-20">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
-            <div class="text-center mobile-mb-6 mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-6">Welcome to Metryx Systems</h2>
-                <div class="w-24 h-1 gradient-blue mx-auto mobile-mb-6 mb-8"></div>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-sm">
-                    Metryx Systems LLC is an award-winning Veteran-Owned Small Business. Our mission is to be the industry leader in helping our Customers deliver on their mission by securing, sustaining, modernizing, and transforming their technologies, processes, and people.
-                </p>
-            </div>
-            
-            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mobile-mb-6 mb-16">
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mobile-mb-6 mb-6">Our Mission-Driven Approach</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-6 mobile-text-sm">
-                        As technology evolves, Metryx Systems is working hard to keep ahead of the trends and solutions that can bring true value to our government customers. We specialize in developing and delivering enhanced user experiences that engage customers, with Agile methodology as a key principle in this process.
-                    </p>
-                    <p class="text-gray-600 mobile-mb-6 mb-6 mobile-text-sm">
-                        Agile and DevSecOps are driving efficiencies for our customers, optimizing resource utilization and minimizing unnecessary costs while maintaining the highest security standards required for government operations.
-                    </p>
-                    <div class="flex items-center space-x-4">
-                        <div class="gradient-blue text-white p-3 rounded-full">
-                            <i class="fas fa-medal text-xl sm:text-2xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mobile-text-sm">Veteran-Owned Small Business</h4>
-                            <p class="text-gray-600 mobile-text-sm">Eligible for VOSB set-asides and dedicated to serving those who served</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                    <div class="bg-blue-50 mobile-px-4 p-6 rounded-xl text-center">
-                        <div class="text-blue-600 text-2xl sm:text-3xl mobile-py-3 mb-3">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">Security First</h4>
-                        <p class="text-gray-600 text-xs sm:text-sm">FedRAMP-aligned controls integrated from day one</p>
-                    </div>
-                    <div class="bg-orange-50 mobile-px-4 p-6 rounded-xl text-center">
-                        <div class="text-orange-600 text-2xl sm:text-3xl mobile-py-3 mb-3">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">Expert Team</h4>
-                        <p class="text-gray-600 text-xs sm:text-sm">Experienced professionals with government expertise</p>
-                    </div>
-                    <div class="bg-green-50 mobile-px-4 p-6 rounded-xl text-center">
-                        <div class="text-green-600 text-2xl sm:text-3xl mobile-py-3 mb-3">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">Innovation</h4>
-                        <p class="text-gray-600 text-xs sm:text-sm">Cutting-edge solutions for modern challenges</p>
-                    </div>
-                    <div class="bg-purple-50 mobile-px-4 p-6 rounded-xl text-center">
-                        <div class="text-purple-600 text-2xl sm:text-3xl mobile-py-3 mb-3">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">Partnership</h4>
-                        <p class="text-gray-600 text-xs sm:text-sm">Long-term relationships built on trust and results</p>
-                    </div>
-                </div>
-            </div>
+  <!-- Security & Compliance (NEW) -->
+  <section id="security" class="section-padding bg-gray-50 scroll-mt-20" aria-label="Security and compliance">
+    <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
+      <div class="text-center mobile-mb-6 mb-12">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-4">Security & Compliance</h2>
+        <div class="w-24 h-1 gradient-green mx-auto mobile-mb-6 mb-6"></div>
+        <p class="text-gray-600 max-w-3xl mx-auto mobile-text-sm">Security is integrated from day one. We align our delivery with federal frameworks and controls to protect mission systems and data.</p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Federal Frameworks</h3>
+          <ul class="space-y-2 text-gray-700 mobile-text-sm">
+            <li><i class="fas fa-check text-green-500 mr-2"></i>NIST SP 800‑171 (controlled unclassified information)</li>
+            <li><i class="fas fa-check text-green-500 mr-2"></i>NIST SP 800‑53 / RMF alignment</li>
+            <li><i class="fas fa-check text-green-500 mr-2"></i>CIS Controls & hardening baselines</li>
+            <li><i class="fas fa-check text-green-500 mr-2"></i>FedRAMP‑aligned practices on AWS</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="section-padding bg-gray-50 scroll-mt-20">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
-            <div class="text-center mobile-mb-6 mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-6">Our Solutions</h2>
-                <div class="w-24 h-1 gradient-green mx-auto mobile-mb-6 mb-8"></div>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-sm">
-                    Metryx Systems LLC modernizes, secures, and scales mission systems with proven expertise across cloud, DevSecOps, AI, and enterprise architecture.
-                </p>
-            </div>
-
-            <div class="grid gap-6 lg:grid-cols-2 xl:grid-cols-3 mobile-gap-4">
-                <div class="service-card bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                    <div class="gradient-blue text-white p-3 sm:p-4 rounded-lg w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mobile-mb-6 mb-6">
-                        <i class="fas fa-cloud text-xl sm:text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-4">Cloud & Platform Engineering</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-4 mobile-text-sm">
-                        AWS landing zones, multi-account guardrails, cost optimization, and scalable cloud architectures designed for government requirements.
-                    </p>
-                    <ul class="text-gray-600 space-y-2 mobile-text-sm">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Multi-cloud strategies</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Cost optimization</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Compliance frameworks</li>
-                    </ul>
-                </div>
-
-                <div class="service-card bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                    <div class="gradient-orange text-white p-3 sm:p-4 rounded-lg w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mobile-mb-6 mb-6">
-                        <i class="fas fa-cogs text-xl sm:text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-4">DevSecOps Automation</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-4 mobile-text-sm">
-                        CI/CD pipelines, Infrastructure as Code, container orchestration with security integrated throughout the development lifecycle.
-                    </p>
-                    <ul class="text-gray-600 space-y-2 mobile-text-sm">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Automated testing</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Container orchestration</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Security integration</li>
-                    </ul>
-                </div>
-
-                <div class="service-card bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                    <div class="gradient-purple text-white p-3 sm:p-4 rounded-lg w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mobile-mb-6 mb-6">
-                        <i class="fas fa-brain text-xl sm:text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-4">Data & AI Solutions</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-4 mobile-text-sm">
-                        ETL pipelines, MLOps, retrieval-augmented AI for decision-making, and advanced analytics platforms.
-                    </p>
-                    <ul class="text-gray-600 space-y-2 mobile-text-sm">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Machine learning operations</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Data visualization</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Predictive analytics</li>
-                    </ul>
-                </div>
-
-                <div class="service-card bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                    <div class="gradient-green text-white p-3 sm:p-4 rounded-lg w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mobile-mb-6 mb-6">
-                        <i class="fas fa-mobile-alt text-xl sm:text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-4">Application Modernization</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-4 mobile-text-sm">
-                        Microservices architecture, API-first design, zero-downtime cutovers, and legacy system transformation.
-                    </p>
-                    <ul class="text-gray-600 space-y-2 mobile-text-sm">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Legacy migration</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>API development</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>User experience design</li>
-                    </ul>
-                </div>
-
-                <div class="service-card bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                    <div class="gradient-blue text-white p-3 sm:p-4 rounded-lg w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mobile-mb-6 mb-6">
-                        <i class="fas fa-shield-alt text-xl sm:text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-4">Resilience & Security</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-4 mobile-text-sm">
-                        High availability/disaster recovery, threat-informed hardening, FedRAMP-aligned security controls.
-                    </p>
-                    <ul class="text-gray-600 space-y-2 mobile-text-sm">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Disaster recovery</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Threat monitoring</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Compliance automation</li>
-                    </ul>
-                </div>
-
-                <div class="service-card bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                    <div class="gradient-orange text-white p-3 sm:p-4 rounded-lg w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mobile-mb-6 mb-6">
-                        <i class="fas fa-chart-line text-xl sm:text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-4">Management Consulting</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-4 mobile-text-sm">
-                        Strategic IT planning, program management, Agile transformation, and organizational change management.
-                    </p>
-                    <ul class="text-gray-600 space-y-2 mobile-text-sm">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Strategic planning</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Change management</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Process optimization</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="bg-white p-6 rounded-xl shadow">
+          <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3">Operational Security</h3>
+          <ul class="space-y-2 text-gray-700 mobile-text-sm">
+            <li><i class="fas fa-check text-green-500 mr-2"></i>HA/DR architecture & resilience testing</li>
+            <li><i class="fas fa-check text-green-500 mr-2"></i>SBOM, IaC scanning, and pipeline security</li>
+            <li><i class="fas fa-check text-green-500 mr-2"></i>Continuous monitoring & threat‑informed defense</li>
+            <li><i class="fas fa-check text-green-500 mr-2"></i>Compliance automation & audit artifacts</li>
+          </ul>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Credibility Section -->
-    <section class="section-padding bg-white scroll-mt-20">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
-            <div class="text-center mobile-mb-6 mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-6">Why Trust Metryx Systems</h2>
-                <div class="w-24 h-1 gradient-purple mx-auto mobile-mb-6 mb-8"></div>
-            </div>
+  <!-- Keep the rest of your existing sections (About, Services, Credibility, Customers, Careers, Results, CTA, Footer) but with the targeted edits below -->
 
-            <div class="grid gap-8 lg:grid-cols-3 mobile-gap-4 mobile-mb-6 mb-16">
-                <div class="text-center">
-                    <div class="gradient-blue text-white p-4 sm:p-6 rounded-full w-20 sm:w-24 h-20 sm:h-24 flex items-center justify-center mx-auto mobile-mb-6 mb-6">
-                        <i class="fas fa-award text-2xl sm:text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-4">Veteran-Owned Small Business</h3>
-                    <p class="text-gray-600 mobile-text-sm">Eligible for VOSB set-asides with deep understanding of government mission requirements and culture.</p>
-                </div>
-                <div class="text-center">
-                    <div class="gradient-green text-white p-4 sm:p-6 rounded-full w-20 sm:w-24 h-20 sm:h-24 flex items-center justify-center mx-auto mobile-mb-6 mb-6">
-                        <i class="fas fa-building text-2xl sm:text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-4">Proven Federal Experience</h3>
-                    <p class="text-gray-600 mobile-text-sm">Years of successful delivery to USPTO, NAVAIR, and other critical government agencies.</p>
-                </div>
-                <div class="text-center">
-                    <div class="gradient-orange text-white p-4 sm:p-6 rounded-full w-20 sm:w-24 h-20 sm:h-24 flex items-center justify-center mx-auto mobile-mb-6 mb-6">
-                        <i class="fas fa-lock text-2xl sm:text-3xl"></i>
-                    </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-4">Security-First Delivery</h3>
-                    <p class="text-gray-600 mobile-text-sm">Compliance and automation integrated from day one with FedRAMP-aligned security controls.</p>
-                </div>
-            </div>
-
-            <div class="bg-gray-50 mobile-px-4 p-6 sm:p-8 rounded-xl">
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mobile-mb-6 mb-6 text-center">Our Proven Results</h3>
-                <div class="grid gap-6 md:grid-cols-3 mobile-gap-4">
-                    <div class="text-center">
-                        <div class="text-3xl sm:text-4xl font-bold text-blue-600 mobile-mb-6 mb-2">40%+</div>
-                        <p class="text-gray-600 mobile-text-sm">System capacity increase at USPTO</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl sm:text-4xl font-bold text-green-600 mobile-mb-6 mb-2">$5M</div>
-                        <p class="text-gray-600 mobile-text-sm">Annual savings delivered</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl sm:text-4xl font-bold text-orange-600 mobile-mb-6 mb-2">99.9%</div>
-                        <p class="text-gray-600 mobile-text-sm">Uptime targets met consistently</p>
-                    </div>
-                </div>
-            </div>
+  <!-- Contracts (targeted edits) -->
+  <section id="contracts" class="section-padding bg-white scroll-mt-20">
+    <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
+      <div class="text-center mobile-mb-6 mb-16">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-6">Contract Vehicles</h2>
+        <div class="w-24 h-1 gradient-purple mx-auto mobile-mb-6 mb-8"></div>
+        <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-sm">Fast, affordable procurement through established vehicles.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mobile-mb-6 mb-16">
+        <div class="bg-gray-50 p-4 sm:p-6 rounded-xl text-center hover:shadow-lg transition-all">
+          <div class="gradient-blue text-white p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4"><i class="fas fa-file-contract" aria-hidden="true"></i></div>
+          <h3 class="font-bold text-gray-900 mb-2 mobile-text-sm">VOSB Set‑Asides</h3>
+          <p class="text-gray-600 text-xs sm:text-sm">Veteran‑Owned Small Business</p>
         </div>
-    </section>
-
-    <!-- Customers Section -->
-    <section id="customers" class="section-padding bg-gray-50 scroll-mt-20">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
-            <div class="text-center mobile-mb-6 mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-6">Helping Our Customers Succeed</h2>
-                <div class="w-24 h-1 gradient-blue mx-auto mobile-mb-6 mb-8"></div>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-sm">
-                    At Metryx Systems, we understand that the true measure of our success is determined by our client relationships. We have built deep and lasting partnerships based on trust that comes from high-quality sustained performance over time.
-                </p>
-            </div>
-
-            <div class="grid gap-6 lg:grid-cols-3 mobile-gap-4">
-                <div class="bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                    <div class="gradient-blue text-white p-3 sm:p-4 rounded-lg w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mobile-mb-6 mb-6">
-                        <i class="fas fa-university text-xl sm:text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mobile-mb-6 mb-4">Federal Civilian</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-6 mobile-text-sm">
-                        For over a decade, Metryx Systems has provided management consulting, end-to-end architecture, development, maintenance, and infrastructure support for large mission-critical systems across civilian agencies.
-                    </p>
-                    <div class="space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-700 mobile-text-sm">U.S. Patent and Trademark Office</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-700 mobile-text-sm">Department of Transportation</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-700 mobile-text-sm">Government Publishing Office</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                    <div class="gradient-green text-white p-3 sm:p-4 rounded-lg w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mobile-mb-6 mb-6">
-                        <i class="fas fa-fighter-jet text-xl sm:text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mobile-mb-6 mb-4">Defense & Intelligence</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-6 mobile-text-sm">
-                        Metryx Systems applies expertise in cloud services, cybersecurity, and advanced analytics to support the Department of Defense and Intelligence communities in their mission to protect the nation.
-                    </p>
-                    <div class="space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-700 mobile-text-sm">Naval Air Systems Command</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-700 mobile-text-sm">Defense Intelligence Agency</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-700 mobile-text-sm">Department of Defense</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                    <div class="gradient-orange text-white p-3 sm:p-4 rounded-lg w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mobile-mb-6 mb-6">
-                        <i class="fas fa-shield-alt text-xl sm:text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mobile-mb-6 mb-4">National Security</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-6 mobile-text-sm">
-                        Our innovative approach uses digital services, cybersecurity, big data, and advanced technology solutions to arm law enforcement agencies with the intelligence they need to anticipate and respond to threats.
-                    </p>
-                    <div class="space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-700 mobile-text-sm">Department of Homeland Security</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-700 mobile-text-sm">Federal Law Enforcement</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-700 mobile-text-sm">State and Local Agencies</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-12 lg:mt-16 bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mobile-mb-6 mb-8 text-center">Success Stories</h3>
-                <div class="grid gap-6 md:grid-cols-2 mobile-gap-4">
-                    <div class="border-l-4 border-blue-500 pl-4 sm:pl-6">
-                        <h4 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-2">USPTO System Modernization</h4>
-                        <p class="text-gray-600 mobile-mb-6 mb-4 mobile-text-sm">Increased system capacity by 40%+, saved $5M annually through cloud optimization and containerization of 26 mission-critical systems.</p>
-                        <div class="text-xs sm:text-sm text-blue-600 font-semibold">Result: Zero-downtime migration with enhanced performance</div>
-                    </div>
-                    <div class="border-l-4 border-green-500 pl-4 sm:pl-6">
-                        <h4 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-2">NAVAIR Secure Network Solution</h4>
-                        <p class="text-gray-600 mobile-mb-6 mb-4 mobile-text-sm">Designed and implemented secure Multi-Level Security (MLS) eNET solution for Navy programs with comprehensive threat protection.</p>
-                        <div class="text-xs sm:text-sm text-green-600 font-semibold">Result: Enhanced security posture with operational efficiency</div>
-                    </div>
-                </div>
-            </div>
+        <div class="bg-gray-50 p-4 sm:p-6 rounded-xl text-center hover:shadow-lg transition-all">
+          <div class="gradient-green text-white p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4"><i class="fas fa-file-contract" aria-hidden="true"></i></div>
+          <h3 class="font-bold text-gray-900 mb-2 mobile-text-sm">IT SINs under MAS</h3>
+          <p class="text-gray-600 text-xs sm:text-sm">Consolidated GSA Schedule (formerly Schedule 70)</p>
         </div>
-    </section>
-
-    <!-- Contract Vehicles Section -->
-    <section id="contracts" class="section-padding bg-white scroll-mt-20">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
-            <div class="text-center mobile-mb-6 mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-6">Contract Vehicles</h2>
-                <div class="w-24 h-1 gradient-purple mx-auto mobile-mb-6 mb-8"></div>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-sm">
-                    Working with our customers to find fast, affordable solutions through established procurement vehicles and streamlined processes.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mobile-mb-6 mb-16">
-                <div class="bg-gray-50 mobile-px-4 p-4 sm:p-6 rounded-xl text-center hover:shadow-lg transition-all duration-300">
-                    <div class="gradient-blue text-white p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-					<h3 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">VOSB Set-Asides</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">Veteran-owned small business</p>
-                </div>
-                <div class="bg-gray-50 mobile-px-4 p-4 sm:p-6 rounded-xl text-center hover:shadow-lg transition-all duration-300">
-                    <div class="gradient-green text-white p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <h3 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">GSA 8(a) </h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">8(a) program contract vehicle</p>
-                </div>
-                <div class="bg-gray-50 mobile-px-4 p-4 sm:p-6 rounded-xl text-center hover:shadow-lg transition-all duration-300">
-                    <div class="gradient-orange text-white p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <h3 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">GSA Multiple Award Schedule</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">Federal services</p>
-                </div>
-                <div class="bg-gray-50 mobile-px-4 p-4 sm:p-6 rounded-xl text-center hover:shadow-lg transition-all duration-300">
-                    <div class="gradient-purple text-white p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <h3 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">IDIQs</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">Agency Specific contract vehicle</p>
-                </div>
-                <div class="bg-gray-50 mobile-px-4 p-4 sm:p-6 rounded-xl text-center hover:shadow-lg transition-all duration-300">
-                    <div class="gradient-blue text-white p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <h3 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">GSA Schedule 70</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">IT solutions and services</p>
-                </div>
-                <div class="bg-gray-50 mobile-px-4 p-4 sm:p-6 rounded-xl text-center hover:shadow-lg transition-all duration-300">
-                    <div class="gradient-green text-white p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <h3 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">GSA OASIS SB</h3>
-                    <p class="text-gray-600 text-xs sm:text-sm">Small Business procurement vehicle</p>
-                </div>
-            </div>
-
-            <div class="bg-gray-50 mobile-px-4 p-6 sm:p-8 rounded-xl">
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mobile-mb-6 mb-6 text-center">NAICS Codes & Certifications</h3>
-                <div class="grid gap-6 md:grid-cols-2 mobile-gap-4">
-                    <div>
-                        <h4 class="font-bold text-gray-900 mobile-mb-6 mb-4 mobile-text-sm">Primary NAICS Codes</h4>
-                        <ul class="space-y-2 text-gray-600 mobile-text-sm">
-                            <li><span class="font-semibold">541511:</span> Custom Computer Programming Services</li>
-                            <li><span class="font-semibold">541512:</span> Computer Systems Design Services</li>
-                            <li><span class="font-semibold">541513:</span> Computer Facilities Management Services</li>
-                            <li><span class="font-semibold">541519:</span> Other Computer Related Services</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-gray-900 mobile-mb-6 mb-4 mobile-text-sm">Certifications</h4>
-                        <ul class="space-y-2 text-gray-600 mobile-text-sm">
-                            <li><i class="fas fa-certificate text-blue-500 mr-2"></i>Veteran-Owned Small Business (VOSB)</li>
-                            <li><i class="fas fa-certificate text-green-500 mr-2"></i>Under Processing-SBA 8(a) Program Certified</li>
-                            <li><i class="fas fa-certificate text-orange-500 mr-2"></i>Under Processing-ISO 9001:2015 Quality Management</li>
-                            <li><i class="fas fa-certificate text-purple-500 mr-2"></i>Under Processing-CMMI Level 3 Appraised</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="bg-gray-50 p-4 sm:p-6 rounded-xl text-center hover:shadow-lg transition-all">
+          <div class="gradient-purple text-white p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4"><i class="fas fa-file-contract" aria-hidden="true"></i></div>
+          <h3 class="font-bold text-gray-900 mb-2 mobile-text-sm">IDIQs</h3>
+          <p class="text-gray-600 text-xs sm:text-sm">Agency‑specific vehicles</p>
         </div>
-    </section>
-
-    <!-- Careers Section -->
-    <section id="careers" class="section-padding bg-gray-50 scroll-mt-20">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
-            <div class="text-center mobile-mb-6 mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-6">Careers</h2>
-                <div class="w-24 h-1 gradient-orange mx-auto mobile-mb-6 mb-8"></div>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-sm">
-                    We are always looking to add to our future-ready workforce. Join our mission-driven team and help modernize government technology.
-                </p>
-            </div>
-
-            <div class="grid gap-8 lg:grid-cols-2 lg:gap-12 mobile-gap-4 mobile-mb-6 mb-16">
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mobile-mb-6 mb-6">Join Our Team</h3>
-                    <p class="text-gray-600 mobile-mb-6 mb-6 mobile-text-sm">
-                        If you're reading this now, there's a strong chance that you're qualified for one of our positions. We're growing, which is great news for us and you. Project managers, developers, UI/UX designers, Agile coaches, cybersecurity engineers, database experts... We need talented professionals across all disciplines.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="gradient-blue text-white p-2 rounded-full mr-4">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-900 mobile-text-sm">Award-Winning Company</h4>
-                                <p class="text-gray-600 text-xs sm:text-sm">Recognized for excellence in IT services and veteran business achievement</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="gradient-green text-white p-2 rounded-full mr-4">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-900 mobile-text-sm">Cutting-Edge Technology</h4>
-                                <p class="text-gray-600 text-xs sm:text-sm">Work with the latest cloud, AI, and DevSecOps technologies</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="gradient-orange text-white p-2 rounded-full mr-4">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-900 mobile-text-sm">Mission Impact</h4>
-                                <p class="text-gray-600 text-xs sm:text-sm">Contribute to projects that matter for national security and public service</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mobile-mb-6 mb-6">Why Work With Us </h3>
-                    <div class="space-y-6">
-                        <div>
-                            <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">We Focus on Our Mission</h4>
-                            <p class="text-gray-600 mobile-text-sm">Our government clients need secure, integrated systems that meet user needs and fulfill critical mission goals. We deliver robust, flexible solutions that ensure consistent performance across the enterprise.</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">We Honor Our Veterans</h4>
-                            <p class="text-gray-600 mobile-text-sm">As a veteran-owned business, we understand the value of military experience and actively recruit veterans who bring discipline, leadership, and mission focus to our team.</p>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">We Value Our People</h4>
-                            <p class="text-gray-600 mobile-text-sm">Our culture is based on mutual support and dedication to our clients' missions. When each team member succeeds, our business thrives.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mobile-gap-4 mobile-mb-6 mb-16">
-                <div class="bg-white mobile-px-4 p-4 sm:p-6 rounded-xl shadow-lg text-center">
-                    <div class="gradient-blue text-white p-3 sm:p-4 rounded-full w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-smile text-xl sm:text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">Job Satisfaction</h4>
-                    <p class="text-gray-600 text-xs sm:text-sm">Meaningful work in the technology industry serving government missions</p>
-                </div>
-                <div class="bg-white mobile-px-4 p-4 sm:p-6 rounded-xl shadow-lg text-center">
-                    <div class="gradient-green text-white p-3 sm:p-4 rounded-full w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-chart-line text-xl sm:text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">Career Progression</h4>
-                    <p class="text-gray-600 text-xs sm:text-sm">Clear advancement paths with mentorship and leadership opportunities</p>
-                </div>
-                <div class="bg-white mobile-px-4 p-4 sm:p-6 rounded-xl shadow-lg text-center">
-                    <div class="gradient-orange text-white p-3 sm:p-4 rounded-full w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-graduation-cap text-xl sm:text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">Paid Training</h4>
-                    <p class="text-gray-600 text-xs sm:text-sm">Continuous learning with education reimbursement and certification support</p>
-                </div>
-                <div class="bg-white mobile-px-4 p-4 sm:p-6 rounded-xl shadow-lg text-center">
-                    <div class="gradient-purple text-white p-3 sm:p-4 rounded-full w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center mx-auto mobile-mb-6 mb-4">
-                        <i class="fas fa-heart text-xl sm:text-2xl"></i>
-                    </div>
-                    <h4 class="font-bold text-gray-900 mobile-mb-6 mb-2 mobile-text-sm">Great Benefits</h4>
-                    <p class="text-gray-600 text-xs sm:text-sm">Comprehensive benefits package including health, dental, 401(k), and flexible work</p>
-                </div>
-            </div>
-
-            <div class="bg-white mobile-px-4 p-6 sm:p-8 rounded-xl shadow-lg">
-                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mobile-mb-6 mb-6 text-center">Benefits & Rewards</h3>
-                <div class="grid gap-6 md:grid-cols-2 mobile-gap-4">
-                    <div>
-                        <h4 class="font-bold text-gray-900 mobile-mb-6 mb-4 mobile-text-sm">Comprehensive Benefits</h4>
-                        <ul class="space-y-2 text-gray-600 mobile-text-sm">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>401(k) Plan with competitive matching</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Medical, Dental, and Vision insurance</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Flexible Spending Account (FSA)</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Life and Disability insurance</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Paid Time Off and holidays</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-gray-900 mobile-mb-6 mb-4 mobile-text-sm">Professional Development</h4>
-                        <ul class="space-y-2 text-gray-600 mobile-text-sm">
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Education reimbursement program</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Professional certification support</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Flexible work options</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Health and wellness programs</li>
-                            <li><i class="fas fa-check text-green-500 mr-2"></i>Employee referral bonuses</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="mt-6 sm:mt-8 text-center">
-                    <p class="text-gray-600 italic mobile-mb-6 mb-4 mobile-text-sm">"Your Career. Our Commitment. We employ the very best people and value the commitment they make every day."</p>
-                    <div class="gradient-orange text-white px-6 sm:px-8 py-3 rounded-lg inline-block mobile-text-sm">
-                        <i class="fas fa-envelope mr-2"></i>Send your resume to info@metryxsystems.com
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="bg-gray-50 p-6 sm:p-8 rounded-xl">
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6 text-center">NAICS Codes & Certifications</h3>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div>
+            <h4 class="font-bold text-gray-900 mb-4 mobile-text-sm">Primary NAICS Codes</h4>
+            <ul class="space-y-2 text-gray-600 mobile-text-sm">
+              <li><span class="font-semibold">541511:</span> Custom Computer Programming Services</li>
+              <li><span class="font-semibold">541512:</span> Computer Systems Design Services</li>
+              <li><span class="font-semibold">541513:</span> Computer Facilities Management Services</li>
+              <li><span class="font-semibold">541519:</span> Other Computer Related Services</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900 mb-4 mobile-text-sm">Certifications</h4>
+            <ul class="space-y-2 text-gray-600 mobile-text-sm">
+              <li><i class="fas fa-certificate text-blue-500 mr-2" aria-hidden="true"></i>Veteran‑Owned Small Business (VOSB) – <span class="italic">Active</span></li>
+              <li><i class="fas fa-certificate text-green-500 mr-2" aria-hidden="true"></i>SBA 8(a) Program – <span class="italic">Pending</span></li>
+              <li><i class="fas fa-certificate text-orange-500 mr-2" aria-hidden="true"></i>ISO 9001:2015 Quality Management – <span class="italic">Pending</span></li>
+              <li><i class="fas fa-certificate text-purple-500 mr-2" aria-hidden="true"></i>CMMI Level 3 – <span class="italic">Pending</span></li>
+            </ul>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Results Section -->
-    <section class="section-padding bg-white scroll-mt-20">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
-            <div class="text-center mobile-mb-6 mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mobile-mb-6 mb-6">Proven Results That Matter</h2>
-                <div class="w-24 h-1 gradient-green mx-auto mobile-mb-6 mb-8"></div>
-            </div>
-            
-            <div class="grid gap-6 md:grid-cols-3 mobile-gap-4 mobile-mb-6 mb-16">
-                <div class="text-center mobile-px-4 p-6 sm:p-8 bg-blue-50 rounded-xl">
-                    <div class="text-4xl sm:text-5xl font-bold text-blue-600 mobile-mb-6 mb-4">99.9%</div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-2">Uptime Achieved</h3>
-                    <p class="text-gray-600 mobile-text-sm">Consistently met uptime targets for mission-critical platforms</p>
-                </div>
-                <div class="text-center mobile-px-4 p-6 sm:p-8 bg-green-50 rounded-xl">
-                    <div class="text-4xl sm:text-5xl font-bold text-green-600 mobile-mb-6 mb-4">$5M+</div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-2">Annual Savings</h3>
-                    <p class="text-gray-600 mobile-text-sm">Millions saved through cloud optimization and open-source strategies</p>
-                </div>
-                <div class="text-center mobile-px-4 p-6 sm:p-8 bg-orange-50 rounded-xl">
-                    <div class="text-4xl sm:text-5xl font-bold text-orange-600 mobile-mb-6 mb-4">100%</div>
-                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mobile-mb-6 mb-2">System Restoration</h3>
-                    <p class="text-gray-600 mobile-text-sm">Flawless recovery during nationwide outages and emergencies</p>
-                </div>
-            </div>
+  <!-- CTA -->
+  <section id="contact" class="gradient-hero section-padding scroll-mt-20">
+    <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8 text-center">
+      <div class="text-white">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mobile-mb-6 mb-6">Let's Modernize Your Mission Systems — Without the Risk</h2>
+        <p class="text-lg sm:text-xl mobile-mb-6 mb-12 text-blue-100 max-w-3xl mx-auto mobile-text-sm">Ready to transform your IT infrastructure? Our veteran‑owned team is standing by to discuss your modernization needs and deliver results that matter.</p>
+        <div class="flex flex-col gap-4 sm:gap-6 justify-center items-center">
+          <a href="mailto:info@metryxsystems.com" class="cta-button w-full sm:w-auto"><i class="fas fa-file-download mr-3" aria-hidden="true"></i>Request Our Capability Statement</a>
+          <a href="tel:+17038632430" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto touch-target mobile-text-sm"><i class="fas fa-phone mr-3" aria-hidden="true"></i>Contact Us Today</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- CTA Section -->
-    <section id="contact" class="gradient-hero section-padding scroll-mt-20">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8 text-center">
-            <div class="text-white">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mobile-mb-6 mb-6">Let's Modernize Your Mission Systems — Without the Risk</h2>
-                <p class="text-lg sm:text-xl mobile-mb-6 mb-12 text-blue-100 max-w-3xl mx-auto mobile-text-sm">
-                    Ready to transform your IT infrastructure? Our veteran-owned team is standing by to discuss your modernization needs and deliver results that matter.
-                </p>
-                <div class="flex flex-col gap-4 sm:gap-6 justify-center items-center">
-                    <a href="mailto:info@metryxsystems.com" class="cta-button w-full sm:w-auto">
-                        <i class="fas fa-file-download mr-3"></i>Request Our Capability Statement
-                    </a>
-                    <a href="tel:+17038632430" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300 inline-flex items-center justify-center w-full sm:w-auto touch-target mobile-text-sm">
-                        <i class="fas fa-phone mr-3"></i>Contact Us Today
-                    </a>
-                </div>
+  <!-- Footer (with accessibility tweaks) -->
+  <footer class="bg-gray-900 text-white section-padding" role="contentinfo">
+    <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
+      <div class="footer-grid grid lg:grid-cols-4 gap-6 sm:gap-8 mobile-mb-6 mb-8">
+        <div class="lg:col-span-2">
+          <div class="flex items-center justify-center lg:justify-start mobile-mb-6 mb-6">
+            <img src="./assets/img/logo.png" alt="Metryx Systems logo" class="h-10 sm:h-12 w-10 sm:w-12 mr-3" />
+            <div>
+              <h3 class="text-xl sm:text-2xl font-bold">Metryx Systems LLC</h3>
+              <p class="text-gray-300 text-sm">Veteran‑Owned Small Business</p>
             </div>
+          </div>
+          <p class="text-gray-300 mobile-mb-6 mb-6 max-w-md mx-auto lg:mx-0 mobile-text-sm">Modernizing IT systems with secure, scalable solutions that enhance mission readiness and operational efficiency.</p>
+          <address class="not-italic space-y-2 text-gray-300 text-center lg:text-left mobile-text-sm">
+            <p><i class="fas fa-map-marker-alt mr-2 text-orange-400" aria-hidden="true"></i>13129 Point Pleasant Drive, Fairfax, VA 22033</p>
+            <p><i class="fas fa-phone mr-2 text-orange-400" aria-hidden="true"></i><a href="tel:+17038632430" class="hover:text-orange-400">(703) 863‑2430</a></p>
+            <p><i class="fas fa-envelope mr-2 text-orange-400" aria-hidden="true"></i><a href="mailto:info@metryxsystems.com" class="hover:text-orange-400">info@metryxsystems.com</a></p>
+            <p>SAM UEI: UZFKLR63N7L5</p>
+            <p>SAM CAGE/NCAGE: 159J1</p>
+          </address>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white section-padding">
-        <div class="max-w-7xl mx-auto mobile-px-4 px-4 sm:px-6 lg:px-8">
-            <div class="footer-grid grid lg:grid-cols-4 gap-6 sm:gap-8 mobile-mb-6 mb-8">
-                <div class="lg:col-span-2">
-                    <div class="flex items-center justify-center lg:justify-start mobile-mb-6 mb-6">
-                        <img src="./assets/img/logo.png" alt="Metryx Systems Logo" class="h-10 sm:h-12 w-10 sm:w-12 mr-3">
-                        <div>
-                            <h3 class="text-xl sm:text-2xl font-bold">Metryx Systems LLC</h3>
-                            <p class="text-gray-300 text-sm">Veteran-Owned Small Business</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mobile-mb-6 mb-6 max-w-md mx-auto lg:mx-0 mobile-text-sm">
-                        Modernizing IT systems with secure, scalable solutions that enhance mission readiness and operational efficiency.
-                    </p>
-                    <div class="space-y-2 text-gray-300 text-center lg:text-left mobile-text-sm">
-                        <p><i class="fas fa-map-marker-alt mr-2 text-orange-400"></i>13129 Point Pleasant Drive Fairfax, VA 22033</p>
-                        <p><i class="fas fa-phone mr-2 text-orange-400"></i>(703) 863-2430</p>
-                        <p><i class="fas fa-envelope mr-2 text-orange-400"></i>info@metryxsystems.com</p>
-						<p>SAM UEI : UZFKLR63N7L5</p>
-						<p>SAM CAGE/NCAGE : 159J1</p>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mobile-mb-6 mb-4">Services</h4>
-                    <ul class="space-y-2 text-gray-300 mobile-text-sm">
-                        <li><a href="#services" class="hover:text-orange-400 transition-colors">Cloud Engineering</a></li>
-                        <li><a href="#services" class="hover:text-orange-400 transition-colors">DevSecOps</a></li>
-                        <li><a href="#services" class="hover:text-orange-400 transition-colors">Data & AI Solutions</a></li>
-                        <li><a href="#services" class="hover:text-orange-400 transition-colors">Application Modernization</a></li>
-                        <li><a href="#services" class="hover:text-orange-400 transition-colors">Cybersecurity</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold mobile-mb-6 mb-4">NAICS Codes</h4>
-                    <ul class="space-y-2 text-gray-300 text-xs sm:text-sm mobile-text-sm">
-                        <li>541511 - Custom Programming</li>
-                        <li>541512 - Systems Design</li>
-                        <li>541513 - Facilities Management</li>
-                        <li>541519 - Other Computer Services</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-                <p class="text-gray-400 text-xs sm:text-sm mobile-mb-6 mb-4 md:mb-0">
-                    © 2024 Metryx Systems LLC. All rights reserved. 
-                </p>
-               <div class="flex space-x-6 text-xs sm:text-sm text-gray-400">
-<a href="/privacy" class="hover:text-orange-400 transition-colors">Privacy Policy</a>
-<a href="/terms" class="hover:text-orange-400 transition-colors">Terms of Use</a>
-</div>
-            </div>
+        <div>
+          <h4 class="text-lg font-bold mobile-mb-6 mb-4">Services</h4>
+          <ul class="space-y-2 text-gray-300 mobile-text-sm">
+            <li><a href="#services" class="hover:text-orange-400 transition-colors">Cloud Engineering</a></li>
+            <li><a href="#services" class="hover:text-orange-400 transition-colors">DevSecOps</a></li>
+            <li><a href="#services" class="hover:text-orange-400 transition-colors">Data & AI Solutions</a></li>
+            <li><a href="#services" class="hover:text-orange-400 transition-colors">Application Modernization</a></li>
+            <li><a href="#security" class="hover:text-orange-400 transition-colors">Cybersecurity</a></li>
+          </ul>
         </div>
-    </footer>
+        <div>
+          <h4 class="text-lg font-bold mobile-mb-6 mb-4">NAICS Codes</h4>
+          <ul class="space-y-2 text-gray-300 text-xs sm:text-sm mobile-text-sm">
+            <li>541511 – Custom Programming</li>
+            <li>541512 – Systems Design</li>
+            <li>541513 – Facilities Management</li>
+            <li>541519 – Other Computer Services</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+        <p class="text-gray-400 text-xs sm:text-sm mobile-mb-6 mb-4 md:mb-0">© 2024 Metryx Systems LLC. All rights reserved.</p>
+        <div class="flex space-x-6 text-xs sm:text-sm text-gray-400">
+          <a href="/privacy" class="hover:text-orange-400 transition-colors">Privacy Policy</a>
+          <a href="/terms" class="hover:text-orange-400 transition-colors">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        // Mobile Menu Functionality
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const closeMobileMenu = document.getElementById('closeMobileMenu');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  <script>
+    // Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const closeMobileMenu = document.getElementById('closeMobileMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-        function openMobileMenu() {
-            mobileMenu.classList.add('active');
-            mobileOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+    function openMobileMenu(){
+      mobileMenu.classList.add('active');
+      mobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      mobileMenuBtn.setAttribute('aria-expanded','true');
+    }
+    function closeMobileMenuFunc(){
+      mobileMenu.classList.remove('active');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      mobileMenuBtn.setAttribute('aria-expanded','false');
+    }
+    mobileMenuBtn.addEventListener('click', openMobileMenu);
+    closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+    mobileOverlay.addEventListener('click', closeMobileMenuFunc);
+    mobileNavLinks.forEach(l=> l.addEventListener('click', closeMobileMenuFunc));
 
-        function closeMobileMenuFunc() {
-            mobileMenu.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+    // Background rotation
+    const backgrounds = document.querySelectorAll('.hero-background');
+    let currentBg = 0;
+    setInterval(()=>{
+      backgrounds[currentBg].classList.remove('active');
+      currentBg = (currentBg + 1) % backgrounds.length;
+      backgrounds[currentBg].classList.add('active');
+    }, 6000);
 
-        mobileMenuBtn.addEventListener('click', openMobileMenu);
-        closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
-        mobileOverlay.addEventListener('click', closeMobileMenuFunc);
+    // Smooth scroll offset for fixed header
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e){
+        if(this.getAttribute('href') === '#' || !document.querySelector(this.getAttribute('href'))) return;
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        const headerHeight = window.innerWidth >= 768 ? 80 : 70;
+        const targetPosition = target.offsetTop - headerHeight;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      });
+    });
 
-        // Close mobile menu when clicking nav links
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', closeMobileMenuFunc);
-        });
+    // Elevate nav on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 100) nav.classList.add('shadow-xl'); else nav.classList.remove('shadow-xl');
+    });
 
-        // Background Image Rotation
-        const backgrounds = document.querySelectorAll('.hero-background');
-        let currentBg = 0;
+    // Animate service cards on scroll
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.style.opacity='1'; entry.target.style.transform='translateY(0)'; } });
+    },{ threshold:0.1, rootMargin:'0px 0px -50px 0px' });
+    document.querySelectorAll('.service-card').forEach(card=>{
+      card.style.opacity='0'; card.style.transform='translateY(30px)'; card.style.transition='opacity .6s ease, transform .6s ease'; observer.observe(card);
+    });
 
-        function rotateBackgrounds() {
-            backgrounds[currentBg].classList.remove('active');
-            currentBg = (currentBg + 1) % backgrounds.length;
-            backgrounds[currentBg].classList.add('active');
-        }
-
-        // Change background every 6 seconds
-        setInterval(rotateBackgrounds, 6000);
-		
-		// Smooth scrolling for navigation links with offset for fixed header
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = window.innerWidth >= 768 ? 80 : 70; // Responsive header height
-                    const targetPosition = target.offsetTop - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Add scroll effect to navigation
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('shadow-xl');
-            } else {
-                nav.classList.remove('shadow-xl');
-            }
-        });
-
-        // Animate service cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Handle orientation changes for mobile
-        window.addEventListener('orientationchange', function() {
-            setTimeout(function() {
-                window.scrollTo(0, window.scrollY);
-            }, 500);
-        });
-
-        // Prevent zoom on double tap for iOS
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-    </script>
+    // iOS double‑tap zoom guard
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) { event.preventDefault(); }
+      lastTouchEnd = now;
+    }, false);
+  </script>
 </body>
 </html>
