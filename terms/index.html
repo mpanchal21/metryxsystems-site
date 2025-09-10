@@ -6,55 +6,120 @@
   <title>Terms of Use | Metryx Systems</title>
   <meta name="description" content="Terms governing use of Metryx Systems LLC websites and content." />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <link rel="icon" href="/favicon.ico" />
-  <style> body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif} .container{max-width:900px} </style>
+  <style>
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .gradient-blue { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+    .gradient-hero { background: linear-gradient(135deg, rgba(30,58,138,0.85) 0%, rgba(59,130,246,0.85) 50%, rgba(5,150,105,0.85) 100%); }
+    .container{max-width:950px}
+  </style>
 </head>
 <body class="bg-white text-gray-800">
+  <!-- Top Bar -->
+  <header class="w-full gradient-blue text-white">
+    <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/assets/img/logo.png" alt="Metryx Systems" class="h-10 w-10 rounded" />
+        <span class="font-extrabold tracking-wide">Metryx Systems</span>
+      </a>
+      <nav class="hidden sm:flex gap-6 text-sm">
+        <a href="/" class="hover:text-orange-300">Home</a>
+        <a href="/privacy" class="hover:text-orange-300">Privacy</a>
+        <a href="/terms" class="hover:text-orange-300">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative">
+    <div class="absolute inset-0">
+      <img src="/assets/hero/bg6.jpg" alt="Hero background" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 gradient-hero"></div>
+    </div>
+    <div class="relative container mx-auto px-6 py-16 sm:py-24 text-white text-center">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white bg-opacity-20 mb-4">
+        <i class="fas fa-file-contract text-2xl"></i>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold">Terms of Use</h1>
+      <p class="opacity-90 mt-2">Effective: September 10, 2025</p>
+    </div>
+  </section>
+
+  <!-- Body -->
   <main class="container mx-auto px-6 py-12">
-    <h1 class="text-3xl sm:text-4xl font-extrabold mb-2">Terms of Use</h1>
-    <p class="text-gray-500 mb-8">Effective: September 10, 2025</p>
+    <section class="space-y-8">
+      <div class="bg-white rounded-xl border p-6 shadow-sm">
+        <h2 class="text-xl font-bold mb-2">Ownership & License</h2>
+        <p>All content on the site—text, graphics, code, and design—is owned by or licensed to Metryx Systems and protected by intellectual‑property laws. You may view and, for personal non‑commercial use, download one copy without modification and with notices intact. Other uses require our written permission.</p>
+      </div>
 
-    <p class="mb-6">By using <strong>metryxsystems.com</strong> (the "Site"), you agree to these Terms. If you do not agree, do not use the Site. We may update these Terms at any time by posting a new version.</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-blue-50 rounded-xl p-6">
+          <h3 class="font-semibold mb-2"><i class="fas fa-check-circle mr-2 text-blue-600"></i>Acceptable Use</h3>
+          <ul class="list-disc pl-6 space-y-2 text-gray-700">
+            <li>No copying, distribution, or exploitation except as allowed above.</li>
+            <li>No interference with site security, performance, or availability.</li>
+            <li>No unlawful use or violation of others’ rights.</li>
+          </ul>
+        </div>
+        <div class="bg-green-50 rounded-xl p-6">
+          <h3 class="font-semibold mb-2"><i class="fas fa-link mr-2 text-green-600"></i>Links to Other Sites</h3>
+          <p class="text-gray-700">We may link to third‑party sites. We are not responsible for their content or policies. Review their terms and privacy notices.</p>
+        </div>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Ownership & License</h2>
-    <p class="mb-6">All content on the Site—including text, graphics, code, and design—is owned by or licensed to Metryx Systems and is protected by intellectual‑property laws. You may view and, for personal non‑commercial use, download one copy of materials without modification and with all proprietary notices intact. Any other use requires our prior written permission.</p>
+      <div class="bg-orange-50 rounded-xl p-6">
+        <h2 class="text-xl font-bold mb-2">No Legal, Contractual, or Employment Relationship</h2>
+        <p>Information on the Site is for general information only and does not create any contract, offer, or employment relationship.</p>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Acceptable Use</h2>
-    <ul class="list-disc pl-6 space-y-2 mb-6">
-      <li>Do not copy, distribute, modify, or exploit Site content except as allowed above.</li>
-      <li>Do not attempt to interfere with Site security, performance, or availability.</li>
-      <li>Do not use the Site to violate law or others’ rights.</li>
-    </ul>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl border p-6 shadow-sm">
+          <h2 class="text-xl font-bold mb-2">Disclaimers</h2>
+          <p>The Site and all content are provided “as is” and “as available” without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, non‑infringement, accuracy, or availability.</p>
+        </div>
+        <div class="bg-white rounded-xl border p-6 shadow-sm">
+          <h2 class="text-xl font-bold mb-2">Limitation of Liability</h2>
+          <p>To the maximum extent permitted by law, Metryx Systems will not be liable for indirect, incidental, special, consequential, or punitive damages, or any loss of data, profits, goodwill, or other intangible losses, arising from or related to your use of the Site.</p>
+        </div>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">No Legal, Contractual, or Employment Relationship</h2>
-    <p class="mb-6">Information on the Site is for general information only and does not create any contract, offer, or employment relationship.</p>
+      <div class="bg-purple-50 rounded-xl p-6">
+        <h2 class="text-xl font-bold mb-2">Indemnification</h2>
+        <p>You agree to defend, indemnify, and hold harmless Metryx Systems LLC and its officers, employees, and agents from claims, damages, liabilities, and expenses (including reasonable attorneys’ fees) arising from your use of the Site or violation of these Terms.</p>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Links to Other Sites</h2>
-    <p class="mb-6">The Site may link to third‑party sites. We are not responsible for their content or policies. Review their terms and privacy notices.</p>
+      <div class="bg-gray-50 rounded-xl p-6">
+        <h2 class="text-xl font-bold mb-2">Governing Law & Venue</h2>
+        <p>These Terms are governed by the laws of the Commonwealth of Virginia. Courts located in Fairfax County, Virginia have exclusive jurisdiction and venue.</p>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Email & Job Communications</h2>
-    <p class="mb-6">If you sign up for email updates or apply for roles, we may send communications related to news, opportunities, or roles. You can opt out using the link in any email.</p>
+      <div class="bg-white rounded-xl border p-6 shadow-sm">
+        <h2 class="text-xl font-bold mb-2">Changes</h2>
+        <p>We may revise these Terms at any time by posting a new version. The Effective date above reflects the current version.</p>
+      </div>
 
-    <h2 class="text-xl font-bold mt-10 mb-3">Disclaimers</h2>
-    <p class="mb-6">The Site and all content are provided "as is" and "as available" without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, non‑infringement, accuracy, or availability.</p>
-
-    <h2 class="text-xl font-bold mt-10 mb-3">Limitation of Liability</h2>
-    <p class="mb-6">To the maximum extent permitted by law, Metryx Systems will not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of data, profits, goodwill, or other intangible losses, arising from or related to your use of the Site.</p>
-
-    <h2 class="text-xl font-bold mt-10 mb-3">Indemnification</h2>
-    <p class="mb-6">You agree to defend, indemnify, and hold harmless Metryx Systems LLC and its officers, employees, and agents from any claims, damages, liabilities, and expenses (including reasonable attorneys’ fees) arising from your use of the Site or violation of these Terms.</p>
-
-    <h2 class="text-xl font-bold mt-10 mb-3">Governing Law & Venue</h2>
-    <p class="mb-6">These Terms are governed by the laws of the Commonwealth of Virginia, without regard to conflict‑of‑law principles. Courts located in Fairfax County, Virginia will have exclusive jurisdiction and venue.</p>
-
-    <h2 class="text-xl font-bold mt-10 mb-3">Changes</h2>
-    <p class="mb-6">We may revise these Terms at any time. The Effective date above reflects the current version.</p>
-
-    <h2 class="text-xl font-bold mt-10 mb-3">Contact</h2>
-    <address class="not-italic mb-2">Metryx Systems LLC<br>13129 Point Pleasant Drive<br>Fairfax, VA 22033</address>
-    <p class="mb-1">Email: <a class="text-blue-600" href="mailto:info@metryxsystems.com">info@metryxsystems.com</a></p>
-    <p class="mb-1">Phone: <a class="text-blue-600" href="tel:+17038632430">(703) 863-2430</a></p>
-    <p class="text-gray-500 text-sm">SAM UEI: UZFKLR63N7L5 · CAGE: 159J1</p>
+      <div class="bg-gray-50 rounded-xl p-6">
+        <h2 class="text-xl font-bold mb-2">Contact</h2>
+        <address class="not-italic text-gray-700">
+          Metryx Systems LLC<br>
+          13129 Point Pleasant Drive, Fairfax, VA 22033<br>
+          Email: <a class="text-blue-600" href="mailto:info@metryxsystems.com">info@metryxsystems.com</a><br>
+          Phone: <a class="text-blue-600" href="tel:+17038632430">(703) 863-2430</a><br>
+          <span class="text-gray-500 text-sm">SAM UEI: UZFKLR63N7L5 · CAGE: 159J1</span>
+        </address>
+      </div>
+    </section>
   </main>
+
+  <footer class="py-10 text-center text-gray-500">
+    <div class="space-x-6">
+      <a class="hover:text-gray-700" href="/privacy">Privacy</a>
+      <a class="hover:text-gray-700" href="/terms">Terms</a>
+      <a class="hover:text-gray-700" href="/">Home</a>
+    </div>
+    <p class="mt-3 text-sm">© 2024 Metryx Systems LLC</p>
+  </footer>
 </body>
 </html>
